@@ -56,6 +56,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Gems added by Brandon
 gem 'popper_js', '~> 1.11.1'
 gem 'bootstrap', '4.0.0.alpha6'
+gem 'devise'
 
 source 'https://rails-assets.org' do 
   gem 'rails-assets-tether', '>= 1.3.3'
