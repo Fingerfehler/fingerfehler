@@ -57,3 +57,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails'
 end
+
+# Gems added by Brandon
+gem 'popper_js', '~> 1.11.1'
+gem 'bootstrap', '4.0.0.alpha6'
+gem 'devise'
+
+source 'https://rails-assets.org' do 
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
