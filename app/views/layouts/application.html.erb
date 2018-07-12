@@ -9,6 +9,21 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-default">
+      <%= link_to 'Chess', root_path, class: "navbar-brand" %>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link text-white' %></li>
+          </ul>
+        <% else %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Sign in', new_user_session_path, class: 'nav-link text-white' %></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Sign up', new_user_registration_path, class: 'nav-link text-white' %></li>
+          </ul>
+        <% end %>
+    </nav>
 
     <!-- alerts for devise, should go under nav-bar -->
   <% if notice.present? %>           
