@@ -1,5 +1,10 @@
 <%= link_to 'Lets Play!', new_game_path %>
 
+<br>
+
+<h3>Games List</h3>
+
 <% @games.each do |game| %>
-  <%= game.all %>
+  <%= link_to game.name, game_path(game) %>
+  <br>
 <% end %>
