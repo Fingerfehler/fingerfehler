@@ -5,29 +5,38 @@
     border-color: #E7E7E7;
 } 
 
-.chessboard {
-    width: 640px;
-    height: 640px;
-    margin: 20px;
-    border: 25px solid #333;
+.chessboard{
+  border: solid 1px black;
+  width: 400px;
+  height: 400px;
 }
-.black {
-    float: left;
-    width: 80px;
-    height: 80px;
-    background-color: #999;
-      font-size:50px;
-    text-align:center;
-    display: table-cell;
-    vertical-align:middle;
+.chessboard > div{
+  width: 100%;
+  height: 12.5%;
+  background: repeating-linear-gradient(
+    90deg,
+    black,
+    black 12.5%,
+    white 12.5%,
+    white 25% 
+  );
 }
-.white {
-    float: left;
-    width: 80px;
-    height: 80px;
-    background-color: #fff;
-    font-size:50px;
-    text-align:center;
-    display: table-cell;
-    vertical-align:middle;
+.chessboard > div:nth-child(2),
+.chessboard > div:nth-child(4),
+.chessboard > div:nth-child(6),
+.chessboard > div:nth-child(8){
+  transform: scaleX(-1);
+}
+
+.booyah-box {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 20px;
+  width: 23%;
 }
