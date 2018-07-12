@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'fingerfehler-team-project.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'fingerfehler.herokuapp.com' }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
