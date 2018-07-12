@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   def index
     @games = Game.all
+    @currentUser = current_user.id
   end
 
   def new
@@ -9,6 +10,8 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
+    @game.white_player_id = current_user.id
+    @game.save
     redirect_to root_path
   end
 
@@ -19,7 +22,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:name, :white_player_id)
   end
 
 end

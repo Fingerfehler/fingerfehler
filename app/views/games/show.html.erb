@@ -1,1 +1,16 @@
 <h1>Show page!</h1>
+<% y = 0 %>
+<% until y == 8 %>
+  <% x = 0 %>
+    <% until x == 8 %>
+      <% if (y+x).even? %>
+        <div class="white"></div>
+      <% else %>
+        <div class="black"></div>
+      <% end %>
+      <% x += 1 %>
+    <% end %>
+  <% end %>
+  <% y += 1 %>
+<% end %>
+
