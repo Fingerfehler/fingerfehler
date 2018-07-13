@@ -5,6 +5,11 @@
 <h3>Games List</h3>
 
 <% @games.each do |game| %>
-  <%= link_to game.name, game_path(game) %>
-  <br>
+  <% if @currentUser == game.white_player_id %>
+    <h1>Works</h1>
+    <br>
+  <% else %>
+    <%= link_to game.name, game_path(game) %>
+    <br>
+  <% end %> 
 <% end %>
