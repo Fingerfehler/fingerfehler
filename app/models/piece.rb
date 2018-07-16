@@ -13,6 +13,18 @@ class Piece < ApplicationRecord
     [0,0],[1,0],[3,0],[5,0],[6,0],[7,0]]      # Represents all the coordinates of pieces in play
   end
 
+  def is_obstructed?(x, y)
+    if x_coord == x
+      is_vertically_obstructed?(x,y)
+    elsif y_coord == y 
+      is_horizontally_obstructed?(x,y)
+    elsif invalid_input?(x,y) == false
+      is_diagonally_obstructed?(x,y)
+    else
+      invalid_input?(x,y)
+    end
+  end
+
   def is_vertically_obstructed?(x, y) 
     y_range = []
     if y_coord < y
@@ -114,20 +126,5 @@ class Piece < ApplicationRecord
       return false
     end
   end
-
-
-  def is_obstructed?(x, y)
-    if x_coord == x
-      is_vertically_obstructed?(x,y)
-    elsif y_coord == y 
-      is_horizontally_obstructed?(x,y)
-    elsif invalid_input?(x,y) == false
-      is_diagonally_obstructed?(x,y)
-    else
-      invalid_input?(x,y)
-    end
-  end
-
-
 
 end
