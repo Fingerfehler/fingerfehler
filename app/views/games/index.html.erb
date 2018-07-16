@@ -2,14 +2,16 @@
 
 <br>
 
-<h3>Games List</h3>
+<h3>Available Games List</h3>
 
 <% @games.each do |game| %>
-  <% if @currentUser == game.white_player_id %>
-    <h1>Works</h1>
-    <br>
-  <% else %>
-    <%= link_to game.name, game_path(game) %>
-    <br>
-  <% end %> 
+  <h1><%= game.name %></h1>
+<% end %>
+
+<h3>My Games List</h3>
+
+<% if current_user.present? %>
+  <% @my_games.each do |game| %>
+    <h1><%= game.name %></h1>
+  <% end %>
 <% end %>

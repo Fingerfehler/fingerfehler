@@ -2,7 +2,9 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.available
-    @currentUser = current_user.id
+    if current_user.present?
+      @my_games = Game.mine(current_user)
+    end
   end
 
   def new

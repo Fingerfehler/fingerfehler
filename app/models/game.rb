@@ -4,5 +4,10 @@ class Game < ApplicationRecord
   has_many :pieces
 
   scope :available, -> { where(black_player_id: nil) }
-  scope :mine, -> { where(white_player_id: @currentUser) }
+  scope :mine, ->(user) { where(white_player_id: user.id) }
+
+  def isMine(userId)
+    return self.white_player_id == userId.id
+  end
+
 end
