@@ -1,10 +1,14 @@
 <h3 class='col-12 offset-4'><%= @game.name %></h3>
-<br>
-<div class="booyah-box col-10 offset-4">  
-  <div class="chessboard">
-    <div></div><div></div>
-    <div></div><div></div>
-    <div></div> <div></div>
-    <div></div> <div></div>
-  </div>
+<div class="chessboard">
+    <% y = 0 %>
+    <% while y < 7 %>
+        <% x = 0 %>
+        <% while x < 7 %>
+            <% if (y+x).even? %>
+                <div class="white"></div>
+            <% else %>
+                <div class="black"></div>
+            <% end %>
+        <% end %>
+    <% end %>         
 </div>

@@ -1,7 +1,6 @@
 class GamesController < ApplicationController
   def index
     @games = Game.all
-    @currentUser = current_user.id
   end
 
   def new
