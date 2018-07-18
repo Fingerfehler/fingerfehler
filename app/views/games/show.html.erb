@@ -1,18 +1,18 @@
-<h3 class='col-12 offset-5'><%= @game.name %></h3>
-<div class='col-12 offset-3'>
-    <div class="chessboard col-12 offset-4">
-        <% y = 0 %>
-        <% while y < 7 %>
-            <% x = 0 %>
-            <% while x < 7 %>
+<h3 class='col-10 offset-5'><%= @game.name %></h3>
+<div class='col-10 offset-3'>
+    <div class="chessboard">
+        <% 0.upto(7) do |y| %>
+            <% 0.upto(7) do |x| %>
                 <% if (y+x).even? %>
                     <div class="white"></div>
                 <% else %>
                     <div class="black"></div>
                 <% end %>
-                <% x += 1 %>
             <% end %>
-            <% y += 1 %>
         <% end %>         
     </div>
 </div>
+
+
+
+
