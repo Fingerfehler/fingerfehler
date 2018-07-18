@@ -1,10 +1,17 @@
-<%= link_to 'Lets Play!', new_game_path %>
+<h3><%= link_to 'Lets Play!', new_game_path, class: "btn btn-primary btn-lg" %></h3>
 
 <br>
 
-<h3>Games List</h3>
+<h3>Available Games List</h3>
 
 <% @games.each do |game| %>
-  <%= link_to game.name, game_path(game) %>
-  <br>
+  <h1><%= link_to game.name, game_path(game) %></h1>
+<% end %>
+
+<h3>My Games List</h3>
+
+<% if current_user.present? %>
+  <% @my_games.each do |game| %>
+    <h1><%= link_to game.name, game_path(game) %></h1>
+  <% end %>
 <% end %>
