@@ -2,8 +2,8 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def current_pieces_coords
-    current_pieces_coords = Array.new
-    self.game.pieces.map { |piece| [piece.x_coord, piece.y_coord] }
+    current_pieces_coords = []
+    self.game.pieces.map { |piece| current_pieces_coords << [piece.x_coord, piece.y_coord] }
     return current_pieces_coords
   end
 
