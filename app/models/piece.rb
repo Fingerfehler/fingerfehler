@@ -2,9 +2,9 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def current_pieces_coords
-    current_pieces_coords = []
-    self.game.pieces.map { |piece| current_pieces_coords << [piece.x_coord, piece.y_coord] }
-    return current_pieces_coords
+    
+    self.game.pieces.map { |piece| [piece.x_coord, piece.y_coord] }
+    
   end
 
   def is_obstructed?(x, y)
@@ -45,12 +45,12 @@ class Piece < ApplicationRecord
       x_range = x_range.reverse               
     end
 
-    x_range.each do |y|           
+    x_range.each do |x|          
       if current_pieces_coords.any? {|n| n == [x,y]}
         return true
       end
     end
-    return false                                 
+    return false                                                         
   end 
 
 
