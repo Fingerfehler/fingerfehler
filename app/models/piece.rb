@@ -20,7 +20,7 @@ class Piece < ApplicationRecord
   end
 
   def is_vertically_obstructed?(x, y) 
-    y_range = []
+    y_range = []                    #!!! need to refactor without using array, also diagonally #Brandon
     if y_coord < y
       (y_coord+1..y-1).each { |n| y_range << n }   # If statement catches if numbers go high to low
     else
