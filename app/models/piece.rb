@@ -28,16 +28,12 @@ class Piece < ApplicationRecord
       y_range = y_range.reverse               # This line reverses it back to the correct order
     end
 
-    coords_to_check = []
-    y_range.each do |y|           #creates the array of coords between points
-      coords_to_check << [x,y]    
+    y_range.each do |y|           
+      if current_pieces_coords.any? {|n| n == [x,y]}
+        return true
+      end
     end
-    duplicates = coords_to_check & current_pieces_coords    # Creates a variable storing any common coords in both arrays
-    if duplicates.empty?                                    # If empty returns false, It's not obstructed
-      return false
-    else 
-      return true
-    end                             
+    return false                            
   end
 
   def is_horizontally_obstructed?(x, y) 
@@ -49,16 +45,12 @@ class Piece < ApplicationRecord
       x_range = x_range.reverse               
     end
 
-    coords_to_check = []
-    x_range.each do |x|           
-      coords_to_check << [x,y]    
+    x_range.each do |y|           
+      if current_pieces_coords.any? {|n| n == [x,y]}
+        return true
+      end
     end
-    duplicates = coords_to_check & current_pieces_coords    
-    if duplicates.empty?                                    
-      return false
-    else 
-      return true
-    end                             
+    return false                                 
   end 
 
 
