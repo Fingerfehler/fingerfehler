@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20180712194902) do
 
   # These are extensions that must be enabled in order to support this database
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180712194902) do
     t.string   "type"
     t.boolean  "captured?"
     t.boolean  "white?"
+    t.integer  "game_id"
   end
 
   create_table "users", force: :cascade do |t|
