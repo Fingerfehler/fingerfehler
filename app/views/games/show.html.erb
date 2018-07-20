@@ -3,7 +3,9 @@
     <div class="chessboard">
         <% 0.upto(7) do |y| %>
             <% 7.downto(0) do |x| %>
-                <div class="#{black_white_cell(x,y)}"></div>
+                <div class="<%= black_white_cell(x,y) %>">
+                    <%= get_piece(@game.pieces,x,y) %>
+                </div>
             <% end %>
         <% end %>         
     </div>
