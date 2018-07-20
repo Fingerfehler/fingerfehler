@@ -28,8 +28,8 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_diagonally_obstructed?(4,4)).to eq true
     end
   end
-  describe "is_diagonally_obstructed?" do 
-    it "should find diagonal obstructions" do
+  describe "is_obstructed?" do 
+    it "should find obstructions" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
       game = Game.create(:name => "test", :white_player_id => user.id)
       piece = Piece.create(:x_coord => 0, :y_coord => 0, :game_id => game.id)
