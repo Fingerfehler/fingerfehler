@@ -1,0 +1,7 @@
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 card form">
+  <h1>Let's Play!</h1>
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :name %>
+    <%= f.submit "Create", class: "btn btn-primary btn-lg" %>
+  <% end %>
+</div>
