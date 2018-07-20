@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @gamesAll = Game.all
     @games = Game.available
     if current_user.present?
       @my_games = Game.mine(current_user)
