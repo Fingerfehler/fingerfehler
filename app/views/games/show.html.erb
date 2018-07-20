@@ -3,11 +3,7 @@
     <div class="chessboard">
         <% 0.upto(7) do |y| %>
             <% 7.downto(0) do |x| %>
-                <% if (y+x).even? %>
-                    <div class="black"></div>
-                <% else %>
-                    <div class="white"></div>
-                <% end %>
+                <div class="#{black_white_cell(x,y)}"></div>
             <% end %>
         <% end %>         
     </div>
