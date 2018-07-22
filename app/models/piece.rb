@@ -1,5 +1,5 @@
 class Piece < ApplicationRecord
-  belongs_to :game
+  belongs_to :game, optional: true
 
   def current_pieces_coords
     
@@ -79,5 +79,4 @@ class Piece < ApplicationRecord
       return true
     end
   end
-
 end
