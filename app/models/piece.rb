@@ -1,10 +1,17 @@
 class Piece < ApplicationRecord
   belongs_to :game, optional: true
 
+  def move_to!(x,y)
+    if is_obstructed?(x,y) == false 
+    end     
+    if current_pieces_coords.any? { |n| n == [x,y] }
+      return true
+    end
+    
+  end
+
   def current_pieces_coords
-    
     self.game.pieces.map { |piece| [piece.x_coord, piece.y_coord] }
-    
   end
 
   def is_obstructed?(x, y)

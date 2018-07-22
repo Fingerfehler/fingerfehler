@@ -37,4 +37,13 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(1,5)).to eq 'invalid input square'
     end
   end
+  describe "Move_to space open" do 
+    it "should check if space is occupied" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      piece = Piece.create(:x_coord => 0, :y_coord => 0, :game_id => game.id)
+      occupying_piece = Piece.create(:x_coord => 1, :y_coord => 1, :game_id => game.id)
+      expect(piece.move_to!(1,0)).to eq true
+    end
+  end
 end
