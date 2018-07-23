@@ -2,8 +2,8 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def valid_board_space?(x, y)
-    valid_range = (0..7)
-    valid_range.include?(x) && valid_range.include?(y)
+    (0..7).include?(x) &&
+    (0..7).include?(y)
   end
 
   def current_pieces_coords 
