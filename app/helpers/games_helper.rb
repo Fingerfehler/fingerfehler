@@ -1,4 +1,5 @@
 module GamesHelper
+  
   def black_white_cell(x,y)
     (y+x).even? ? "black" : "white"
   end
@@ -9,6 +10,6 @@ module GamesHelper
     else
       render html: ''.html_safe
     end
-
   end
+  
 end

@@ -1,10 +1,12 @@
 <h3 class='col-10 offset-5'><%= @game.name %></h3>
 <div class='col-10 offset-3'>
     <div class="chessboard">
+
         <% 7.downto(0) do |y| %>
             <% 0.upto(7) do |x| %>
                 <div class="<%= black_white_cell(x,y) %>">
                     <%= show_piece(@game.piece_at(x,y)) %>
+
                 </div>
             <% end %>
         <% end %>         

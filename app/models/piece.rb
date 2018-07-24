@@ -1,6 +1,32 @@
 class Piece < ApplicationRecord
   belongs_to :game, optional: true
 
+  def move_to!(x,y)
+    if square_is_occupied?(x,y)
+      piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
+      if piece_to_capture.white? == self.white?
+        return "Can't capture your own piece"
+      else
+        piece_to_capture.capture!
+        self.update_coords!(x,y)
+      end
+    else 
+      self.update_coords!(x,y)
+    end
+  end
+
+  def capture!
+    self.update_attributes(x_coord: 8, y_coord: 8, captured?: true)
+  end
+
+  def update_coords!(x,y)
+    self.update_attributes(x_coord: x, y_coord: y)
+  end
+
+  def piece_on_square(x,y)
+    found_piece = game.pieces.find_by(x_coord: x, y_coord: y)
+  end
+
   def valid_board_space?(x, y)
     (0..7).include?(x) &&
     (0..7).include?(y)
