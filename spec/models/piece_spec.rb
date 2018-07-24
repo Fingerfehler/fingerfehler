@@ -75,6 +75,8 @@ RSpec.describe Piece, type: :model do
       piece = Piece.create(:x_coord => 4, :y_coord => 4, :game_id => game.id, :white? => true, :captured? => false)
       black_piece = Piece.create(:x_coord => 5, :y_coord => 5, :game_id => game.id, :white? => false, :captured? => false)
       piece.move_to!(5,5)
+      black_piece.reload
+      piece.reload
       expect(black_piece.x_coord).to eq 8
       expect(black_piece.y_coord).to eq 8
       #expect(black_piece.captured).to eq true

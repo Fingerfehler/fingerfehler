@@ -2,39 +2,29 @@ class Piece < ApplicationRecord
   belongs_to :game, optional: true
 
   def move_to!(x,y)
-    piece_to_capture = Piece.find_by(x_coord: x, y_coord: y)
-    raise "Move is off board!" unless valid_board_space?(x,y) == true
-    raise "Move is obstructed!" unless is_obstructed?(x,y) == false 
-    if square_is_occupied?(x,y) == true
+    if square_is_occupied?(x,y)
+      piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
       if piece_to_capture.white? == self.white?
         return "Can't capture your own piece"
-      elsif piece_color?(x,y) != self.white?
-        piece_to_capture.x_coord = nil
-        #piece_to_capture.save
-        #capture(piece_to_capture)
-        #self.update_coords(x,y)
+      else
+        piece_to_capture.capture!
+        self.update_coords!(x,y)
       end
-    else self.update_coords(x,y)
+    else 
+      self.update_coords!(x,y)
     end
   end
 
-  def capture(piece)
-    self.x_coord = 8 && self.y_coord = 8 
+  def capture!
+    self.update_attributes(x_coord: 8, y_coord: 8, captured?: true)
   end
 
-  def update_coords(x,y)
-    self.x_coord = x 
-    self.y_coord = y
+  def update_coords!(x,y)
+    self.update_attributes(x_coord: x, y_coord: y)
   end
 
   def piece_on_square(x,y)
-    found_piece = Piece.find_by(x_coord: x, y_coord: y)
-  end
-
-    # returns true for white and false for black
-  def piece_color?(x,y) 
-    found_piece = Piece.find_by(x_coord: x, y_coord: y)
-    return found_piece.white?
+    found_piece = game.pieces.find_by(x_coord: x, y_coord: y)
   end
 
   def valid_board_space?(x, y)
