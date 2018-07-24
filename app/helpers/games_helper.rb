@@ -3,7 +3,12 @@ module GamesHelper
     (y+x).even? ? "black" : "white"
   end
 
-  def get_piece(pieces,x,y)
-    render html: '&#9817;'.html_safe
+  def show_piece(piece)
+    if piece
+      render html: piece.get_image.html_safe
+    else
+      render html: ''.html_safe
+    end
+
   end
 end
