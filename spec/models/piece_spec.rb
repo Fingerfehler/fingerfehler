@@ -37,5 +37,4 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(1,5)).to eq 'invalid input square'
     end
   end
-
 end

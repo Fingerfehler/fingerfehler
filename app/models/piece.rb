@@ -1,5 +1,5 @@
 class Piece < ApplicationRecord
-  belongs_to :game
+  belongs_to :game, optional: true
 
   def valid_board_space?(x, y)
     (0..7).include?(x) &&
@@ -74,5 +74,4 @@ class Piece < ApplicationRecord
       return true
     end
   end
-
 end

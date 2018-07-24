@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe King, type: :model do
+
   describe "is_valid_move king" do 
     it "should be an invalid movement" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
@@ -26,5 +27,6 @@ RSpec.describe King, type: :model do
       expect(piece.valid_move?(2,0)).to eq true
     end
   end
+
 
 end
