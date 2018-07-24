@@ -85,7 +85,6 @@ RSpec.describe Piece, type: :model do
 
     end
   end
-
 end
 
 

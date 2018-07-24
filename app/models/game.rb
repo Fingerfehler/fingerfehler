@@ -26,4 +26,9 @@ class Game < ApplicationRecord
       King.create(:game_id => self.id, :x_coord => 4, :y_coord => y, :captured? => false, :white? => is_white )
     end
   end
+
+  def piece_at(x,y)
+    pieces.find_by(x_coord: x, y_coord: y)
+
+  end
 end
