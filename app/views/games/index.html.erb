@@ -6,6 +6,7 @@
 
 <% @games.each do |game| %>
   <h1><%= link_to game.name, game_path(game) %></h1>
+  <%= button_to "Join Game!", game, :method => :put %>
 <% end %>
 
 <h3>My Games List</h3>
