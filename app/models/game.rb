@@ -28,6 +28,6 @@ class Game < ApplicationRecord
   end
 
   def piece_at(x,y)
-    pieces.find_by(x_coord: x, y_coord: y)
+    pieces.find_by(x_coord: x, y_coord: y) || EmptySquare.new
   end
 end

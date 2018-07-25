@@ -4,11 +4,6 @@ module GamesHelper
   end
 
   def show_piece(piece)
-    if piece
-      render html: piece.get_image.html_safe
-    else
-      render html: ''.html_safe
-    end
-
+    render html: piece.get_image.html_safe
   end
 end
