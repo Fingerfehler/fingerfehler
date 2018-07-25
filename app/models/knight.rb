@@ -9,6 +9,7 @@ class Knight < Piece
   end
 
   def valid_move?(x,y)
+    return false unless super(x,y)
     (y - y_coord).abs == 2 && (x - x_coord).abs == 1 ||
     (y - y_coord).abs == 1 && (x - x_coord).abs == 2 
   end

@@ -27,7 +27,7 @@ class Piece < ApplicationRecord
     found_piece = game.pieces.find_by(x_coord: x, y_coord: y)
   end
 
-  def valid_board_space?(x, y)
+  def valid_move?(x, y)
     (0..7).include?(x) &&
     (0..7).include?(y)
   end

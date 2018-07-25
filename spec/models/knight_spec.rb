@@ -12,6 +12,8 @@ RSpec.describe Knight, type: :model do
       expect(piece.valid_move?(2,0)).to eq false
       expect(piece.valid_move?(3,1)).to eq false
       expect(piece.valid_move?(5,1)).to eq false
+      expect(piece.valid_move?(3,-1)).to eq false
+      expect(piece.valid_move?(99,-10)).to eq false
     end
   end
   describe "is_valid_move king" do 
