@@ -5,7 +5,7 @@
         <% 7.downto(0) do |y| %>
             <% 0.upto(7) do |x| %>
                 <div class="<%= black_white_cell(x,y) %>">
-                    <%= show_piece(@game.piece_at(x,y)) %>
+                    <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path %>
 
                 </div>
             <% end %>
