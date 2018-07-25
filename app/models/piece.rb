@@ -100,4 +100,8 @@ class Piece < ApplicationRecord
       return true
     end
   end
+
+  def has_moved?
+    self.previous_changes["x_coord"].present? || self.previous_changes["y_coord"].present?
+  end
 end
