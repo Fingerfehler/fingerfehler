@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Knight, type: :model do
-  describe "is_valid_move king" do 
+  describe "is_valid_move knight" do 
     it "should be an invalid movement" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
       game = Game.create(:name => "test", :white_player_id => user.id)
@@ -16,7 +16,7 @@ RSpec.describe Knight, type: :model do
       expect(piece.valid_move?(99,-10)).to eq false
     end
   end
-  describe "is_valid_move king" do 
+  describe "is_valid_move knight" do 
     it "should be valid movement" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
       game = Game.create(:name => "test", :white_player_id => user.id)
