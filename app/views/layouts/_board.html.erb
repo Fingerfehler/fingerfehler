@@ -2,11 +2,11 @@
 <h3 class='col-10 offset-5'><%= @game.name %></h3>
 <div class='col-10 offset-3'>
     <div class="chessboard">
-
         <% 7.downto(0) do |y| %>
             <% 0.upto(7) do |x| %>
-                <div class="<%= black_white_cell(x,y) %>">
-                    <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path(game_id: @game.id) %>
+            <% selected = @piece && @pieces[0].id == @piece.id && (@pieces[0].x_coord == x) && (@pieces[0].y_coord == y)%>
+                <div class="<%= selected ? 'highlight' : black_white_cell(x,y) %>">
+                        <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path(:game_id => @game.id, :id => @pieces[0].id) %>
                 </div>
             <% end %>
         <% end %>         

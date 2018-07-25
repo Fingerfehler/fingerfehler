@@ -5,7 +5,7 @@ class PiecesController < ApplicationController
   end
 
   def show
-    @piece = Piece.find_by_id(params[:x_coord && :y_coord])
+    @piece = Piece.find_by_id(params[:id])
     @game = @piece.game
     @pieces = [@piece]
   end
