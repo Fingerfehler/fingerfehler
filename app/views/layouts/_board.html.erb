@@ -6,10 +6,10 @@
             <% 0.upto(7) do |x| %>
             <% piece = @game.piece_at(x,y) %>
             <% selected = @piece && piece.id == @piece.id %>
-            <%= link_to game_piece_path(@piece, :x_coord => x, :y_coord => y) do %>
+            <%= link_to game_piece_path(@piece, :x_coord => x, :y_coord => y,:action=>"update") do %>
                 <div class="<%= selected ? 'highlight' : black_white_cell(x,y) %>">
                     <% if piece.id %>
-                        <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path(:game_id => @game.id, :id => piece) %>
+                        <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path(:game_id => @game.id, :id => piece.id) %>
                     <% end %>
                 </div>
                 <% end %>
