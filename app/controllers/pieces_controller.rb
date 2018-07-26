@@ -12,6 +12,7 @@ class PiecesController < ApplicationController
 
   def update
     @piece = Piece.find_by_id(params[:id])
+    puts "PIECE ID BOY:" + params[:id]
     redirect_to game_pieces_path
   end
 
