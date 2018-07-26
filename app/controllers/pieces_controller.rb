@@ -7,7 +7,7 @@ class PiecesController < ApplicationController
   def show
     @piece = Piece.find_by_id(params[:id])
     @game = @piece.game
-    @pieces = [@piece]
+    @pieces = @game.pieces
   end
 
 
