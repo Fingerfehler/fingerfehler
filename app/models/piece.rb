@@ -45,7 +45,7 @@ class Piece < ApplicationRecord
   end
 
   def square_is_vacant?(x, y)
-    !square_is_occupied?
+    !square_is_occupied?(x, y)
   end
 
   def is_obstructed?(x, y)
