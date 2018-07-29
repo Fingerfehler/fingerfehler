@@ -58,6 +58,8 @@ RSpec.describe Pawn, type: :model do
         end
       end
 
+    end
+
     describe "pawn capture movement" do
 
       it "should be valid to capture opponent piece" do
@@ -84,6 +86,5 @@ RSpec.describe Pawn, type: :model do
       end
 
     end
-
   end
 end
