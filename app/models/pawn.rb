@@ -9,11 +9,11 @@ class Pawn < Piece
   end
 
   def valid_one_forward_move?(x,y)
-    square_is_vacant?(x,y) && x == x_coord && y = y_coord + self.movement_direction
+    square_is_vacant?(x,y) && (x == x_coord) && (y = y_coord + self.movement_direction)
   end
 
   def valid_two_forward_move?(x,y)
-    square_is_vacant?(x,y) && x == x_coord && y = y_coord + (self.movement_direction * 2)
+    square_is_vacant?(x,y) && (x == x_coord) && (y = y_coord + (self.movement_direction * 2))
   end
 
   def valid_standard_capture?(x,y)
