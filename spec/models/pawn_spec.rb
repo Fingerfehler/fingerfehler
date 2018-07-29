@@ -26,12 +26,17 @@ RSpec.describe Pawn, type: :model do
         end
       end
 
-      it "should be invalid if an ally piece is in the way" do
-        let(:white_2_x) { 3 }
-        let(:white_2_y) { 2 }
+    end
 
-        let(:black_2_x) { 4 }
-        let(:black_2_y) { 5 }
+    describe "blocked pawn movement" do
+
+      let(:white_2_x) { 3 }
+      let(:white_2_y) { 2 }
+
+      let(:black_2_x) { 4 }
+      let(:black_2_y) { 5 }
+
+      it "should be invalid if an ally piece is in the way" do
         aggregate_failures do
           expect(white_pawn.valid_move?(3,2)).to eq false
           expect(black_pawn.valid_move?(4,5)).to eq false
@@ -60,25 +65,32 @@ RSpec.describe Pawn, type: :model do
 
     end
 
-    describe "pawn capture movement" do
+    describe "opponent capture movement" do
+
+      let(:white_2_x) { 3 }
+      let(:white_2_y) { 5 }
+
+      let(:black_2_x) { 4 }
+      let(:black_2_y) { 2 }
 
       it "should be valid to capture opponent piece" do
-        let(:white_2_x) { 3 }
-        let(:white_2_y) { 5 }
-
-        let(:black_2_x) { 4 }
-        let(:black_2_y) { 2 }
         aggregate_failures do 
           expect(white_pawn.valid_move?(4,2)).to eq true
           expect(black_pawn.valid_move?(3,5)).to eq true
         end
       end
 
+    end
+
+    describe "self capture movement" do
+
+      let(:white_2_x) { 4 }
+      let(:white_2_y) { 2 }
+
+      let(:black_2_x) { 3 }
+      let(:black_2_y) { 5 }
+
       it "should be invalid to capture own piece" do
-        let(:white_2_x) { 4 }
-        let(:white_2_y) { 2 }
-        let(:black_2_x) { 3 }
-        let(:black_2_y) { 5 }
         aggregate_failures do
           expect(white_pawn.valid_move?(4,2)).to eq false
           expect(black_pawn.valid_move?(3,5)).to eq false
@@ -86,5 +98,6 @@ RSpec.describe Pawn, type: :model do
       end
 
     end
+
   end
 end
