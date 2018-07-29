@@ -1,11 +1,7 @@
 class Pawn < Piece
 
   def get_image
-    if white?
-      '&#9817;'
-    else
-      '&#9823;'
-    end
+    white? ? '&#9817;' : '&#9823;'
   end
 
   def valid_move?(x,y)
@@ -27,7 +23,5 @@ class Pawn < Piece
   def movement_direction
     white? ? 1 : -1
   end
-
-
 
 end
