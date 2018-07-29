@@ -28,7 +28,7 @@ class Piece < ApplicationRecord
   end
 
   def opponent_on_square?(x,y)
-    piece_on_square(x,y).white? != self.white?
+    piece_on_square(x,y).nil? ? false : piece_on_square(x,y).white? != self.white?
   end
 
   def valid_move?(x, y)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
 
-  let(:game) { FactoryBot.build(:game) }
+  let(:game) { FactoryBot.create(:game) }
   let(:white_pawn) { FactoryBot.build(:pawn, x_coord: white_1_x, y_coord: white_1_y, white?: true, game: game) }
   let(:white_pawn_2) { FactoryBot.build(:pawn, x_coord: white_2_x, y_coord: white_2_y, white?: true, game: game) }
   let(:black_pawn) { FactoryBot.build(:pawn, x_coord: black_1_x, y_coord: black_1_y, white?: false, game: game) }
