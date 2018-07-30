@@ -11,5 +11,5 @@ module GamesHelper
       render html: ''.html_safe
     end
   end
-  
+ 
 end

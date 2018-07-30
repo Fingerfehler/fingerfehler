@@ -1,6 +1,6 @@
 class Piece < ApplicationRecord
-  belongs_to :game, optional: true
-
+  belongs_to :game
+  
   def move_to!(x,y)
     if square_is_occupied?(x,y)
       piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
