@@ -7,10 +7,10 @@ class Rook < Piece
     end
   end
 
-  def valid_move(x,y)
+  def valid_move?(x,y)
     return false unless super(x,y)
-    (y_coord - y) == 0 ||
-    (x_coord - x) == 0
+    y == y_coord && x != x_coord ||
+    x == x_coord && y != y_coord 
   end 
 
 end
