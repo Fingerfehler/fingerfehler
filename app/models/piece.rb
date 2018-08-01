@@ -46,8 +46,13 @@ class Piece < ApplicationRecord
     current_pieces_coords.any? {|n| n == [x,y]}
   end
 
+
   def square_is_vacant?(x, y)
     !square_is_occupied?(x, y)
+  end
+
+  def is_unobstructed?(x,y)
+    !is_obstructed(x,y)
   end
 
   def is_obstructed?(x, y)
