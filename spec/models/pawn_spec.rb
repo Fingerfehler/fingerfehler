@@ -2,26 +2,39 @@ require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
 
-  let(:game) { FactoryBot.create(:game) }
-  let(:white_pawn) { FactoryBot.build(:pawn, x_coord: white_1_x, y_coord: white_1_y, white?: true, game: game) }
-  let(:white_pawn_2) { FactoryBot.build(:pawn, x_coord: white_2_x, y_coord: white_2_y, white?: true, game: game) }
-  let(:black_pawn) { FactoryBot.build(:pawn, x_coord: black_1_x, y_coord: black_1_y, white?: false, game: game) }
-  let(:black_pawn_2) { FactoryBot.build(:pawn, x_coord: black_2_x, y_coord: black_2_y, white?: false, game: game) }
-
   describe "#valid_move?" do
-
-    let(:white_1_x) { 3 }
-    let(:white_1_y) { 1 }
-
-    let(:black_1_x) { 4 }
-    let(:black_1_y) { 6 }
 
     describe "standard pawn movement" do
 
-      it "should be valid" do
+      it "should be valid for move 1" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
         aggregate_failures do
           expect(white_pawn.valid_move?(3,2)).to eq true
-          expect(black_pawn.valid_move?(4,5)).to eq true
+        end
+      end
+
+      it "should be valid for move 2" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
+        aggregate_failures do
+          expect(white_pawn.valid_move?(3,3)).to eq true
+        end
+      end
+
+      it "should be invalid to move 2 if has_moved?" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
+        white_pawn.update_attributes(:x_coord => 3, :y_coord => 2)
+        aggregate_failures do
+
+          expect(white_pawn.valid_move?(3,4)).to eq false
         end
       end
 
@@ -29,53 +42,29 @@ RSpec.describe Pawn, type: :model do
 
     describe "blocked pawn movement" do
 
-      let(:white_2_x) { 3 }
-      let(:white_2_y) { 2 }
-
-      let(:black_2_x) { 4 }
-      let(:black_2_y) { 5 }
-
       it "should be invalid if an ally piece is in the way" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
+        white_pawn2 = Pawn.create(:x_coord => 3, :y_coord => 2, :white? => true, :game_id => game.id)
         aggregate_failures do
           expect(white_pawn.valid_move?(3,2)).to eq false
-          expect(black_pawn.valid_move?(4,5)).to eq false
         end
       end
 
     end
 
-    describe "two square pawn movement" do
-
-      it "should be valid when pawn hasn't moved" do
-        aggregate_failures do
-          expect(white_pawn.valid_move?(3,3)).to eq true
-          expect(black_pawn.valid_move?(4,4)).to eq true
-        end
-      end
-
-      it "should be invalid after pawn has moved" do
-        white_pawn.move_to!(3,2)
-        black_pawn.move_to!(4,5)
-        aggregate_failures do
-          expect(white_pawn.valid_move?(3,4)).to eq false
-          expect(black_pawn.valid_move?(4,3)).to eq false
-        end
-      end
-
-    end
-
-    describe "opponent capture movement" do
-
-      let(:white_2_x) { 3 }
-      let(:white_2_y) { 5 }
-
-      let(:black_2_x) { 4 }
-      let(:black_2_y) { 2 }
+    describe "capture movement" do
 
       it "should be valid to capture opponent piece" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
+        black_pawn = Pawn.create(:x_coord => 4, :y_coord => 2, :white? => false, :game_id => game.id)
         aggregate_failures do 
           expect(white_pawn.valid_move?(4,2)).to eq true
-          expect(black_pawn.valid_move?(3,5)).to eq true
         end
       end
 
@@ -83,16 +72,14 @@ RSpec.describe Pawn, type: :model do
 
     describe "self capture movement" do
 
-      let(:white_2_x) { 4 }
-      let(:white_2_y) { 2 }
-
-      let(:black_2_x) { 3 }
-      let(:black_2_y) { 5 }
-
       it "should be invalid to capture own piece" do
+        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+        game = Game.create(:name => "test", :white_player_id => user.id)
+        game.pieces.destroy_all
+        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id)
+        white_pawn2 = Pawn.create(:x_coord => 4, :y_coord => 2, :white? => true, :game_id => game.id)
         aggregate_failures do
           expect(white_pawn.valid_move?(4,2)).to eq false
-          expect(black_pawn.valid_move?(3,5)).to eq false
         end
       end
 

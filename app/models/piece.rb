@@ -17,10 +17,12 @@ class Piece < ApplicationRecord
 
   def capture!
     self.update_attributes(x_coord: 8, y_coord: 8, captured?: true)
+    self.save
   end
 
   def update_coords!(x,y)
     self.update_attributes(x_coord: x, y_coord: y)
+    self.save
   end
 
   def piece_on_square(x,y)
@@ -109,7 +111,12 @@ class Piece < ApplicationRecord
   end
 
   def has_moved?
-    self.previous_changes["x_coord"].present? || self.previous_changes["y_coord"].present?
+    if self.previous_changes["x_coord"].present?
+      return self.previous_changes["x_coord"].count { |i| i } > 1
+    elsif self.previous_changes["y_coord"].present?
+      return self.previous_changes["y_coord"].count { |i| i } > 1
+    end
+    false
   end
 
   def has_not_moved?
