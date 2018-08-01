@@ -9,6 +9,13 @@ class GamesController < ApplicationController
     end
   end
 
+  def update
+    @game = Game.find(params[:id])
+    @game.black_player_id = current_user.id
+    @game.save
+    render :show 
+  end
+
   def new
     @game = Game.new
   end
@@ -22,6 +29,12 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @pieces = @game.pieces
+  end
+
+  def update
+    @game = Game.find(params[:id])
+    @pieces = @game.pieces
   end
 
   private

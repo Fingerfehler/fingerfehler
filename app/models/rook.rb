@@ -6,4 +6,11 @@ class Rook < Piece
       '&#9820;'
     end
   end
+
+  def valid_move?(x,y)
+    return false unless super(x,y)
+    (y - y_coord).abs == 0 ||
+    (x - x_coord).abs == 0
+  end 
+
 end
