@@ -10,9 +10,10 @@ class Queen < Piece
 
   def valid_move?(x,y)
     return false unless super(x,y)
+      # Diagonal
     (y - y_coord).abs == (x - x_coord).abs ||
-    y == y_coord && x != x_coord || 
-    y != y_coord && x == x_coord
+      # Horizontal & Vertical
+    (y - y_coord).abs == 0 || (x - x_coord).abs == 0
   end  
 
 end
