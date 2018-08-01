@@ -12,8 +12,6 @@ RSpec.describe Rook, type: :model do
       expect(piece.valid_move?(1,1)).to eq false
       expect(piece.valid_move?(4,3)).to eq false
       expect(piece.valid_move?(5,1)).to eq false
-      expect(piece.valid_move?(3,-1)).to eq false
-      expect(piece.valid_move?(99,-10)).to eq false
     end
   end
   describe "is_valid_move rook" do 
