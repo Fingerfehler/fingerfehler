@@ -12,7 +12,8 @@ class King < Piece
     return false unless super(x,y)
     (y - y_coord).abs <= 1 &&
     (x - x_coord).abs <= 1
-  end  
+  end
+
 
 end
 
