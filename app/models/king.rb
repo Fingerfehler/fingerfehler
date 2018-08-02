@@ -14,6 +14,4 @@ class King < Piece
     (x - x_coord).abs <= 1
   end
 
-
 end
-

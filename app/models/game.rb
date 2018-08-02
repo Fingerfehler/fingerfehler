@@ -30,4 +30,37 @@ class Game < ApplicationRecord
   def piece_at(x,y)
     pieces.find_by(x_coord: x, y_coord: y) || EmptySquare.new
   end
+
+  def in_check? 
+    if white_in_check == true || black_in_check == true
+      return true 
+    else 
+      return false
+    end
+  end
+
+  def white_in_check
+    self.pieces.all.each do |piece|
+      return true if piece.white? == false && piece.valid_move?(white_king.x_coord, white_king.y_coord)
+    end
+  end
+
+  def black_in_check
+    self.pieces.all.each do |piece|
+      return true if piece.white? && piece.valid_move?(black_king.x_coord, black_king.y_coord)
+    end
+  end
+
+  def white_king
+    self.pieces.all.each do |piece|
+      return piece if piece.type == "King" && piece.white?
+    end
+  end
+
+  def black_king
+    self.pieces.all.each do |piece|
+      return piece if piece.type == "King" && piece.white? == false
+    end
+  end
+    
 end
