@@ -17,7 +17,7 @@ class Pawn < Piece
   end
 
   def valid_standard_capture?(x,y)
-    (x - x_coord).abs == 1 && (y == y_coord + self.movement_direction) && opponent_on_square?(x,y)
+    x_values(x) == 1 && (y == y_coord + self.movement_direction) && opponent_on_square?(x,y)
   end
 
   def movement_direction
