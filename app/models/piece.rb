@@ -12,6 +12,7 @@ class Piece < ApplicationRecord
       end
     else 
       self.update_coords!(x,y)
+      self.move_count += 1
     end
   end
 
