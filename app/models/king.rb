@@ -10,7 +10,7 @@ class King < Piece
   end
 
   def can_castle?(x,y)
-    has_not_moved? && y == y_coord && game.piece_at(x,y).is_a? Rook && game.piece_at(x,y).has_not_moved? && is_unobstructed?(x,y)
+    has_not_moved? && y == y_coord && is_rook?(x,y) && game.piece_at(x,y).has_not_moved? && is_unobstructed?(x,y)
   end
 
   def castle!(x,y)
@@ -19,6 +19,10 @@ class King < Piece
 
   def castling_displacement(x,y)
     x > x_coord ? 2 : -2
+  end
+
+  def is_rook?(x,y)
+    game.piece_at(x,y).is_a? Rook
   end
 
 end

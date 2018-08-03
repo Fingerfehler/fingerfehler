@@ -52,7 +52,7 @@ class Piece < ApplicationRecord
   end
 
   def is_unobstructed?(x,y)
-    !is_obstructed(x,y)
+    !is_obstructed?(x,y)
   end
 
   def is_obstructed?(x, y)

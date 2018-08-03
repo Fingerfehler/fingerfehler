@@ -10,12 +10,12 @@ class Rook < Piece
   end
 
   def can_castle?
-    king_starting_square = game.piece_at(3, y_coord)
+    king_starting_square = game.piece_at(4, y_coord)
     king_starting_square.is_a? King && king_starting_square.can_castle?(x_coord, y_coord) 
   end
 
   def castle!
-    move_to!(x_coord + castling_displacement, y_coord)
+    move_to!(x_coord + castling_displacement, y_coord) if can_castle?
   end
 
   def castling_displacement
