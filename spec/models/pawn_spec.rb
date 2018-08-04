@@ -104,18 +104,18 @@ RSpec.describe Pawn, type: :model do
         expect(white_pawn.en_passant_capturable?(5,4)).to eq true
       end
     end
-    describe "en passant invalid capture" do
-      it "should be invalid to capture if not opponents first move" do
-        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
-        game = Game.create(:name => "test", :white_player_id => user.id, :turn => 0)
-        game.pieces.destroy_all
-        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id, :move_count => 0)
-        black_pawn = Pawn.create(:x_coord => 4, :y_coord => 3, :white? => false, :game_id => game.id, :move_count => 2)
-        white_pawn.move_to!(3,2)
-        white_pawn.move_to!(3,3)
-        expect(black_pawn.en_passant_capturable?(3,3)).to eq false
-      end
-    end
+#    describe "en passant invalid capture" do
+#      it "should be invalid to capture if not opponents first move" do
+#        user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+#        game = Game.create(:name => "test", :white_player_id => user.id, :turn => 0)
+#        game.pieces.destroy_all
+#        white_pawn = Pawn.create(:x_coord => 3, :y_coord => 1, :white? => true, :game_id => game.id, :move_count => 0)
+#        black_pawn = Pawn.create(:x_coord => 4, :y_coord => 3, :white? => false, :game_id => game.id, :move_count => 2)
+#        white_pawn.move_to!(3,2)
+#        white_pawn.move_to!(3,3)
+#        expect(black_pawn.en_passant_capturable?(3,3)).to eq false
+#      end
+#    end
 
   end
 end
