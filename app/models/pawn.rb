@@ -5,23 +5,42 @@ class Pawn < Piece
   end
 
   def valid_move?(x,y)
-    super(x,y) && (valid_one_forward_move?(x,y) || valid_two_forward_move?(x,y) || valid_standard_capture?(x,y))
+    return false unless super(x,y)
+    return false unless valid_white_move?(x,y) || valid_black_move?(x,y)
+    valid_single_move?(x,y) || valid_first_move?(x,y) || valid_standard_capture?(x,y)
   end
 
-  def valid_one_forward_move?(x,y)
-    square_is_vacant?(x,y) && (x == x_coord) && (y == y_coord + self.movement_direction)
+  def valid_single_move?(x,y)
+    x_values(x) == 0 && 
+    y_values(y) == 1
   end
 
-  def valid_two_forward_move?(x,y)
-    square_is_vacant?(x,y) && (x == x_coord) && (y == y_coord + (self.movement_direction * 2)) && has_not_moved?
+  def valid_first_move?(x,y)
+    move_count == 0 && 
+    x_values(x) == 0 && 
+    y_values(y) <= 2
   end
 
   def valid_standard_capture?(x,y)
-    (x - x_coord).abs == 1 && (y == y_coord + self.movement_direction) && opponent_on_square?(x,y)
+    opponent_on_square?(x,y) &&
+    x_values(x) == 1 && 
+    y_values(y) == 1  
   end
 
-  def movement_direction
-    white? ? 1 : -1
+  def valid_white_move?(x,y)
+    self.white? && (y - y_coord) > 0
+  end
+
+  def valid_black_move?(x,y)
+    !self.white? && (y - y_coord) < 0
+  end
+
+  def en_passant_capturable?(x,y)
+    # Needs to answer false if not turn after (piece_on_square(x,y)) just moved.
+    opponent_on_square?(x,y) &&
+    piece_on_square(x,y).move_count == 1 &&
+    x_values(x) == 1 && 
+    y_values(y) == 0    
   end
 
 end
