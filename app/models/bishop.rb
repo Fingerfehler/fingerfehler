@@ -1,16 +1,12 @@
 class Bishop < Piece
 
   def get_image
-    if white?
-      '&#9815;'
-    else
-      '&#9821;'
-    end
+    white? ? '&#9815;' : '&#9821;'
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-    (y - y_coord).abs == (x - x_coord).abs
+    super(x,y) &&
+    x_offset(x) == y_offset(y)
   end
 
 end

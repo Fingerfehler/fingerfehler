@@ -1,17 +1,12 @@
 class Rook < Piece
-  
+
   def get_image
-    if white?
-      '&#9814;'
-    else
-      '&#9820;'
-    end
+    white? ? '&#9814;' : '&#9820;'
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-    (y - y_coord).abs == 0 ||
-    (x - x_coord).abs == 0
+    super(x,y) &&
+    x_offset(x) == 0 || y_offset(y) == 0
   end 
 
 end

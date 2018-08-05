@@ -15,6 +15,14 @@ class Piece < ApplicationRecord
     end
   end
 
+  def x_offset(x)
+    (x - self.x_coord).abs
+  end
+
+  def y_offset(y)
+    (y - self.y_coord).abs
+  end 
+
   def capture!
     self.update_attributes(x_coord: 8, y_coord: 8, captured?: true)
     self.save

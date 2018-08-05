@@ -1,19 +1,13 @@
 class Queen < Piece
 
   def get_image
-    if white?
-      '&#9813;'
-    else
-      '&#9819;'
-    end
+    white? ? '&#9813;' : '&#9819;'
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-      # Diagonal
-    (y - y_coord).abs == (x - x_coord).abs ||
-      # Horizontal & Vertical
-    (y - y_coord).abs == 0 || (x - x_coord).abs == 0
+    super(x,y) &&
+    x_offset(x) == y_offset(y) ||
+    x_offset(x) == 0 || y_offset(y) == 0 
   end  
 
 end
