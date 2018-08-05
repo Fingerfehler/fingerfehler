@@ -48,14 +48,15 @@ RSpec.describe Piece, type: :model do
     end
   end
   describe "move_to empty square" do
-    it "should update piece with new coords" do
+    it "should update piece with new coords and increment move count" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
-      game = Game.create(:name => "test", :white_player_id => user.id)
+      game = Game.create(:name => "test", :white_player_id => user.id, :turn => 0)
       game.pieces.destroy_all
-      piece = Piece.create(:x_coord => 4, :y_coord => 4, :game_id => game.id)
+      piece = Piece.create(:x_coord => 4, :y_coord => 4, :game_id => game.id, :move_count => 0)
       piece.move_to!(5,5)
       expect(piece.x_coord).to eq 5
-      expect(piece.y_coord).to eq 5 
+      expect(piece.y_coord).to eq 5
+      expect(piece.move_count).to eq 1 
     end
   end
   describe "move_to square with same color piece" do 
