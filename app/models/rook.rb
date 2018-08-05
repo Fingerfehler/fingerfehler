@@ -1,4 +1,5 @@
 class Rook < Piece
+  
   def get_image
     if white?
       '&#9814;'
