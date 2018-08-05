@@ -24,6 +24,7 @@ RSpec.describe Game, type: :model do
       black_rook = Rook.create(:x_coord => 0, :y_coord => 3, :game_id => game.id, :white? => false)
       black_queen = Queen.create(:x_coord => 2, :y_coord => 5, :game_id => game.id, :white? => false)
       black_bishop = Bishop.create(:x_coord => 5, :y_coord => 4, :game_id => game.id, :white? => false)
+      game.reload
       expect(game.in_check?).to eq true
     end
   end
@@ -37,6 +38,7 @@ RSpec.describe Game, type: :model do
       black_rook = Rook.create(:x_coord => 0, :y_coord => 3, :game_id => game.id, :white? => false)
       black_queen = Queen.create(:x_coord => 2, :y_coord => 5, :game_id => game.id, :white? => false)
       black_bishop = Bishop.create(:x_coord => 5, :y_coord => 4, :game_id => game.id, :white? => false)
+      game.reload
       expect(game.in_check?).to eq false
     end
   end
@@ -50,6 +52,7 @@ RSpec.describe Game, type: :model do
       white_rook = Rook.create(:x_coord => 0, :y_coord => 3, :game_id => game.id, :white? => true)
       white_queen = Queen.create(:x_coord => 2, :y_coord => 5, :game_id => game.id, :white? => true)
       white_bishop = Bishop.create(:x_coord => 5, :y_coord => 4, :game_id => game.id, :white? => true)
+      game.reload
       expect(game.in_check?).to eq true
     end
   end
@@ -63,6 +66,7 @@ RSpec.describe Game, type: :model do
       white_rook = Rook.create(:x_coord => 0, :y_coord => 3, :game_id => game.id, :white? => true)
       white_queen = Queen.create(:x_coord => 2, :y_coord => 5, :game_id => game.id, :white? => true)
       white_bishop = Bishop.create(:x_coord => 5, :y_coord => 4, :game_id => game.id, :white? => true)
+      game.reload
       expect(game.in_check?).to eq false
     end
   end

@@ -32,35 +32,23 @@ class Game < ApplicationRecord
   end
 
   def in_check? 
-    if white_in_check == true || black_in_check == true
-      return true 
-    else 
-      return false
-    end
+    white_in_check || black_in_check 
   end
 
   def white_in_check
-    self.pieces.all.each do |piece|
-      return true if piece.white? == false && piece.valid_move?(white_king.x_coord, white_king.y_coord)
-    end
+    pieces.any? { |piece| !piece.white? && piece.valid_move?(white_king.x_coord, white_king.y_coord) }
   end
 
   def black_in_check
-    self.pieces.all.each do |piece|
-      return true if piece.white? && piece.valid_move?(black_king.x_coord, black_king.y_coord)
-    end
+    pieces.any? { |piece| piece.white? && piece.valid_move?(black_king.x_coord, black_king.y_coord) }
   end
 
-  def white_king
-    self.pieces.all.each do |piece|
-      return piece if piece.type == "King" && piece.white?
-    end
+  def white_king  
+    pieces.find_by(type: "King", white?: true)
   end
 
   def black_king
-    self.pieces.all.each do |piece|
-      return piece if piece.type == "King" && piece.white? == false
-    end
+    pieces.find_by(type: "King", white?: false)
   end
     
 end
