@@ -11,20 +11,20 @@ class Pawn < Piece
   end
 
   def valid_single_move?(x,y)
-    x_values(x) == 0 && 
-    y_values(y) == 1
+    x_offset(x) == 0 && 
+    y_offset(y) == 1
   end
 
   def valid_first_move?(x,y)
     move_count == 0 && 
-    x_values(x) == 0 && 
-    y_values(y) <= 2
+    x_offset(x) == 0 && 
+    y_offset(y) <= 2
   end
 
   def valid_standard_capture?(x,y)
     opponent_on_square?(x,y) &&
-    x_values(x) == 1 && 
-    y_values(y) == 1  
+    x_offset(x) == 1 && 
+    y_offset(y) == 1  
   end
 
   def valid_white_move?(x,y)
@@ -35,12 +35,12 @@ class Pawn < Piece
     !self.white? && (y - y_coord) < 0
   end
 
-  def en_passant_capturable?(x,y)
+  def can_capture_en_passant?(x,y)
     # Needs to answer false if not turn after (piece_on_square(x,y)) just moved.
     opponent_on_square?(x,y) &&
     piece_on_square(x,y).move_count == 1 &&
-    x_values(x) == 1 && 
-    y_values(y) == 0    
+    x_offset(x) == 1 && 
+    y_offset(y) == 0    
   end
 
 end

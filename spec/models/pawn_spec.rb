@@ -84,8 +84,8 @@ RSpec.describe Pawn, type: :model do
         white_pawn2.move_to!(5,3)
         white_pawn.save!
         white_pawn2.save!
-        expect(black_pawn.en_passant_capturable?(3,3)).to eq true
-        expect(black_pawn.en_passant_capturable?(5,3)).to eq true
+        expect(black_pawn.can_capture_en_passant?(3,3)).to eq true
+        expect(black_pawn.can_capture_en_passant?(5,3)).to eq true
       end
     end
     describe "en passant capture black" do
@@ -97,11 +97,13 @@ RSpec.describe Pawn, type: :model do
         black_pawn2 = Pawn.create(:x_coord => 5, :y_coord => 6, :white? => false, :game_id => game.id, :move_count => 0)
         white_pawn = Pawn.create(:x_coord => 4, :y_coord => 4, :white? => true, :game_id => game.id, :move_count => 2)
         black_pawn.move_to!(3,4)
-        black_pawn2.move_to!(5,4)
         black_pawn.save!
+        game.reload
+        black_pawn2.move_to!(5,4)   
         black_pawn2.save!
-        expect(white_pawn.en_passant_capturable?(3,4)).to eq true
-        expect(white_pawn.en_passant_capturable?(5,4)).to eq true
+        game.reload
+        expect(white_pawn.can_capture_en_passant?(3,4)).to eq true
+        expect(white_pawn.can_capture_en_passant?(5,4)).to eq true
       end
     end
 #    describe "en passant invalid capture" do
@@ -113,7 +115,7 @@ RSpec.describe Pawn, type: :model do
 #        black_pawn = Pawn.create(:x_coord => 4, :y_coord => 3, :white? => false, :game_id => game.id, :move_count => 2)
 #        white_pawn.move_to!(3,2)
 #        white_pawn.move_to!(3,3)
-#        expect(black_pawn.en_passant_capturable?(3,3)).to eq false
+#        expect(black_pawn.can_capture_en_passant?(3,3)).to eq false
 #      end
 #    end
 
