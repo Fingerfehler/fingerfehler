@@ -5,8 +5,8 @@ class Bishop < Piece
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-    y_values(y) == x_values(x)
+    super(x,y) &&
+    x_offset(x) == y_offset(y)
   end
 
 end

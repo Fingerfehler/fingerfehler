@@ -5,11 +5,9 @@ class Queen < Piece
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-      # Diagonal
-    y_values(y) == x_values(x) ||
-      # Horizontal & Vertical
-    y_values(y) == 0 || x_values(x) == 0
+    super(x,y) &&
+    x_offset(x) == y_offset(y) ||
+    x_offset(x) == 0 || y_offset(y) == 0 
   end  
 
 end

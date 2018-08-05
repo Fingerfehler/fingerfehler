@@ -5,9 +5,9 @@ class Knight < Piece
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-    y_values(y) == 2 && x_values(x) == 1 ||
-    y_values(y) == 1 && x_values(x) == 2 
+    super(x,y) && 
+    x_offset(x) == 1 && y_offset(y) == 2 || 
+    x_offset(x) == 2 && y_offset(y) == 1  
   end
 
 end
