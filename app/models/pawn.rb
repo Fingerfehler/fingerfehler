@@ -25,11 +25,11 @@ class Pawn < Piece
   end
 
   def valid_white_move?(x,y)
-    self.white? && (y - y_coord) > 0
+    white? && (y - y_coord) > 0
   end
 
   def valid_black_move?(x,y)
-    !self.white? && (y - y_coord) < 0
+    !white? && (y - y_coord) < 0
   end
 
   def can_capture_en_passant?(x,y)

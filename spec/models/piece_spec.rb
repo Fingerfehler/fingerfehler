@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
+
   describe "is_vertically_obstructed?" do 
     it "should find vertical obstructions" do
       user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
