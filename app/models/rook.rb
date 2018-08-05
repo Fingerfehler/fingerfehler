@@ -9,5 +9,4 @@ class Rook < Piece
     x_offset(x) == 0 || y_offset(y) == 0
   end 
 
-
 end
