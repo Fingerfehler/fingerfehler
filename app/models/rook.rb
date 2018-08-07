@@ -11,7 +11,11 @@ class Rook < Piece
 
   def can_castle?
     king_starting_square = game.piece_at(4, y_coord)
-    king_starting_square.is_a? King && king_starting_square.can_castle?(x_coord, y_coord) 
+    if king_starting_square.is_a? King
+      king_starting_square.can_castle?(x_coord, y_coord)
+    else
+      false
+    end
   end
 
   def castle!
