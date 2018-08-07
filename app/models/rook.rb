@@ -19,7 +19,7 @@ class Rook < Piece
   end
 
   def castle!
-    move_to!(x_coord + castling_displacement, y_coord) if can_castle?
+    move_to!(x_coord + castling_displacement, y_coord)
   end
 
   def castling_displacement

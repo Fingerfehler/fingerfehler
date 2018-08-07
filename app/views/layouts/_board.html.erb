@@ -10,10 +10,14 @@
                         <% if piece.id %>
                             <%= link_to show_piece(@game.piece_at(x,y)), game_piece_path(:game_id => @game.id, :id => piece.id) %>
                         <% elsif @piece %>
-                            <%= link_to 'X', game_piece_path(@piece,:x_coord => x, :y_coord => y),method: :patch %>
+                            <%= link_to 'X', game_piece_path(@piece,:x_coord => x, :y_coord => y), method: :patch %>
                         <% end %>
                     </div>
             <% end %>
         <% end %>         
+    </div>
+    <div class="castling-links">
+        <%= link_to 'Castle Kingside', game_castle_kingside_path(:game_id => @game.id), method: :patch %>
+        <%= link_to 'Castle Queenside', game_castle_queenside_path(:game_id => @game.id), method: :patch %>
     </div>
 </div>
