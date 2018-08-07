@@ -13,12 +13,13 @@ class Piece < ApplicationRecord
     else 
       self.update_coords!(x,y)
       self.move_count += 1
-      #take_turn!
+      take_turn!
     end
   end
 
   def take_turn!
-    #self.game.turn += 1
+    #super
+    self.game.turn += 1
   end
 
   def x_offset(x)
