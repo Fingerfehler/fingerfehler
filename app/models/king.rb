@@ -9,4 +9,8 @@ class King < Piece
     x_offset(x) <= 1 && y_offset(y) <= 1
   end
 
+  def self_in_check?(x,y) 
+    game.pieces.any? { |piece| !piece.white? && piece.valid_move?(x,y)}
+  end
+
 end

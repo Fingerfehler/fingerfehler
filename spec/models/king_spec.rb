@@ -29,6 +29,15 @@ RSpec.describe King, type: :model do
       expect(piece.valid_move?(2,0)).to eq true
     end
   end
-
+  describe "move into check" do
+    it "should be invalid to move into check" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      white_king = King.create(:x_coord => 3, :y_coord => 1, :game_id => game.id, :white? => true, :move_count => 0)
+      black_queen = Queen.create(:x_coord => 0, :y_coord => 2, :game_id => game.id, :white? => false, :move_count => 0)
+      expect(white_king.self_in_check?(3,2)).to eq true
+    end
+  end
 
 end
