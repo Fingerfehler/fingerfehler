@@ -25,5 +25,4 @@ class King < Piece
     game.piece_at(x,y).is_a? Rook
   end
 
->>>>>>> castling
 end
