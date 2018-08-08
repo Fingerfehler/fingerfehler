@@ -130,12 +130,7 @@ class Piece < ApplicationRecord
   end
 
   def has_moved?
-    if self.previous_changes["x_coord"].present?
-      return self.previous_changes["x_coord"].count { |i| i } > 1
-    elsif self.previous_changes["y_coord"].present?
-      return self.previous_changes["y_coord"].count { |i| i } > 1
-    end
-    false
+    move_count != 0
   end
 
   def has_not_moved?
