@@ -30,5 +30,68 @@ RSpec.describe King, type: :model do
     end
   end
 
+  describe "king#can_castle?" do
+    it "should be valid if conditions are met" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      king = King.create(:x_coord => 4, :y_coord => 0, :game_id => game.id)
+      rook = Rook.create(:x_coord => 7, :y_coord => 0, :game_id => game.id)
+      aggregate_failures do 
+        expect(king.can_castle?(7,0)).to eq true
+      end
+    end
+    it "should be invalid if king has moved" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      king = King.create(:x_coord => 4, :y_coord => 0, :game_id => game.id)
+      rook = Rook.create(:x_coord => 7, :y_coord => 0, :game_id => game.id)
+      king.move_to!(3,1)
+      king.move_to!(3,0)
+      aggregate_failures do
+        expect(king.can_castle?(7,0)).to eq false
+      end
+    end
+    it "should be invalid if rook has moved" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      king = King.create(:x_coord => 4, :y_coord => 0, :game_id => game.id, :white? => true)
+      rook = Rook.create(:x_coord => 7, :y_coord => 0, :game_id => game.id, :white? => true)
+      rook.move_to!(7,1)
+      rook.move_to!(7,0)
+      aggregate_failures do
+        expect(king.can_castle?(7,0)).to eq false
+      end
+    end
+    it "should be invalid if there is an obstruction" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      king = King.create(:x_coord => 4, :y_coord => 0, :game_id => game.id)
+      rook = Rook.create(:x_coord => 7, :y_coord => 0, :game_id => game.id)
+      bishop = Bishop.create(:x_coord => 5, :y_coord => 0, :game_id => game.id)
+      aggregate_failures do
+        expect(king.can_castle?(7,0)).to eq false
+      end
+    end
+  end
+
+  describe "king#castle!" do
+    it "should place the king in the correct spot" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      king = King.create(:x_coord => 4, :y_coord => 0, :game_id => game.id)
+      rook = Rook.create(:x_coord => 7, :y_coord => 0, :game_id => game.id)
+      king.castle!(7,0)
+      aggregate_failures do
+        expect(king.x_coord).to eq 6
+        expect(king.y_coord).to eq 0
+      end
+    end
+  end
+
 
 end

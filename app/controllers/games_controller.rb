@@ -37,6 +37,40 @@ class GamesController < ApplicationController
     @pieces = @game.pieces
   end
 
+  def castle_kingside
+    @game = Game.find(params[:game_id])
+    y = @game.white_player_id == current_user.id ? 0 : 7
+    if @king = @game.pieces.find_by(:x_coord => 4, :y_coord => y)
+      if @king.can_castle?(7,y)
+        @rook = @game.pieces.find_by(:x_coord => 7, :y_coord => y)
+        @king.castle!(7,y)
+        @rook.castle!
+        render :show
+      end
+    end
+    flash.now[:alert] = "You cannot castle at this time."
+    render :show
+  end
+
+  def castle_queenside
+    @game = Game.find(params[:game_id])
+    y = @game.white_player_id == current_user.id ? 0 : 7
+    if @king = @game.pieces.find_by(:x_coord => 4, :y_coord => y)
+      if @king.can_castle?(0,y)
+        @rook = @game.pieces.find_by(:x_coord => 0, :y_coord => y)
+        @king.castle!(0,y)
+        @rook.castle!
+        render :show
+      else
+        flash.now[:alert] = "You cannot castle at this time."
+        render :show
+      end
+    else
+      flash.now[:alert] = "You cannot castle at this time."
+      render :show
+    end
+  end
+
   private
 
   def game_params

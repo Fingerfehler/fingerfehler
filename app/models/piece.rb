@@ -2,8 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game
   
   def move_to!(x,y)
-    if square_is_occupied?(x,y)
-      piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
+    if piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
       if piece_to_capture.white? == self.white?
         return "Can't capture your own piece"
       else
@@ -61,8 +60,13 @@ class Piece < ApplicationRecord
     current_pieces_coords.any? {|n| n == [x,y]}
   end
 
+
   def square_is_vacant?(x, y)
     !square_is_occupied?(x, y)
+  end
+
+  def is_unobstructed?(x,y)
+    !is_obstructed?(x,y)
   end
 
   def is_obstructed?(x, y)
