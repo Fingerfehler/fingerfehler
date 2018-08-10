@@ -21,4 +21,5 @@ class King < Piece
       game.white_pieces.none? { |piece| piece.valid_move?(x, y) }
     end
   end
+
 end
