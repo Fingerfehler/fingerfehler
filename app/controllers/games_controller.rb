@@ -55,6 +55,7 @@ class GamesController < ApplicationController
       flash.now[:alert] = "You cannot castle at this time."
     end
     render :show
+  end
 
   def destroy
     @game = Game.find(params[:id])
