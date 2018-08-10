@@ -36,7 +36,7 @@ RSpec.describe King, type: :model do
       game.pieces.destroy_all
       white_king = King.create(:x_coord => 3, :y_coord => 1, :game_id => game.id, :white? => true, :move_count => 0)
       black_queen = Queen.create(:x_coord => 0, :y_coord => 2, :game_id => game.id, :white? => false, :move_count => 0)
-      expect(white_king.self_in_check?(3,2)).to eq true
+      expect(white_king.threatened?(3,2)).to eq true
     end
   end
 
