@@ -55,6 +55,12 @@ class GamesController < ApplicationController
       flash.now[:alert] = "You cannot castle at this time."
     end
     render :show
+
+  def destroy
+    @game = Game.find(params[:id])
+    @pieces = @game.pieces
+    @game.destroy
+    redirect_to root_path
   end
 
   private
