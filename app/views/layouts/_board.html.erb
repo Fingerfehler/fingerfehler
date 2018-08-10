@@ -1,5 +1,31 @@
 
 <h3 class='col-10 offset-5'><%= @game.name %></h3>
+
+<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Rage Quit!
+</button>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="quitModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="quitModalLabel"><strong>Do you really want to quit?</strong> <br> **This will delete the whole game!!**</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pVD53JffuTI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+      </div>
+      <div class="modal-footer"> 
+        <%= button_to "Rage Quit!", game_path(@game.id), :method => :delete, :class =>"btn btn-warning" %>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class='col-10 offset-3'>
     <div class="chessboard">
         <% 7.downto(0) do |y| %>
@@ -21,3 +47,5 @@
         <%= link_to 'Castle Queenside', game_castle_queenside_path(:game_id => @game.id), method: :patch %>
     </div>
 </div>
+
+
