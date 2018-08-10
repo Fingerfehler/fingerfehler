@@ -32,11 +32,6 @@ class GamesController < ApplicationController
     @pieces = @game.pieces
   end
 
-  def update
-    @game = Game.find(params[:id])
-    @pieces = @game.pieces
-  end
-
   private
 
   def game_params
