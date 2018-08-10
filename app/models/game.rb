@@ -40,11 +40,11 @@ class Game < ApplicationRecord
   end
 
   def white_in_check
-    pieces.any? { |piece| !piece.white? && piece.valid_move?(white_king.x_coord, white_king.y_coord) }
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord) }
   end
 
   def black_in_check
-    pieces.any? { |piece| piece.white? && piece.valid_move?(black_king.x_coord, black_king.y_coord) }
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord) }
   end
 
   def white_king  
@@ -53,6 +53,14 @@ class Game < ApplicationRecord
 
   def black_king
     pieces.find_by(type: "King", white?: false)
+  end
+
+  def white_pieces
+    pieces.select { |piece| piece.white? }
+  end
+
+  def black_pieces
+    pieces.select { |piece| piece.black? }
   end
     
 end
