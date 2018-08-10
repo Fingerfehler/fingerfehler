@@ -39,4 +39,8 @@ class Pawn < Piece
     x_offset(x) == 1 && y_offset(y) == 0    
   end
 
+  def next_turn_en_passant?
+    
+  end
+
 end
