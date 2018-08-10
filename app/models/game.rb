@@ -54,5 +54,40 @@ class Game < ApplicationRecord
   def black_king
     pieces.find_by(type: "King", white?: false)
   end
+
+  def can_kingside_castle?(player)
+    y = player.id == white_player.id ? 0 : 7
+    king = pieces.find_by(:x_coord => 4, :y_coord => y)
+    rook = pieces.find_by(:x_coord => 7, :y_coord => y)
+    if king && rook
+      king.can_castle?(7,y) && rook.can_castle?
+    end
+  end
+
+  def can_queenside_castle?(player)
+    y = player.id == white_player.id ? 0 : 7
+    king = pieces.find_by(:x_coord => 4, :y_coord => y)
+    rook = pieces.find_by(:x_coord => 1, :y_coord => y)
+    if king && rook
+      king.can_castle?(1,y) && rook.can_castle?
+    end
+  end
+
+  def kingside_castle!(player)
+    y = player.id == white_player.id ? 0 : 7
+    king = pieces.find_by(:x_coord => 4, :y_coord => y)
+    rook = pieces.find_by(:x_coord => 7, :y_coord => y)
+    king.castle!(7,y)
+    rook.castle!
+  end
+
+  def queenside_castle!(player)
+    y = player.id == white_player.id ? 0 : 7
+    king = pieces.find_by(:x_coord => 4, :y_coord => y)
+    rook = pieces.find_by(:x_coord => 0, :y_coord => y)
+    king.castle!(0,y)
+    rook.castle!
+  end
+
     
 end
