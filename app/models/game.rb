@@ -32,7 +32,7 @@ class Game < ApplicationRecord
   end
 
   def take_turn!
-    #self.turn += 1
+    self.turn += 1
   end
 
   def in_check? 
@@ -54,5 +54,13 @@ class Game < ApplicationRecord
   def black_king
     pieces.find_by(type: "King", white?: false)
   end
-    
+
+  def white_turn?
+    turn % 2 == 0
+  end
+
+  def black_turn?
+    !white_turn?
+  end
+
 end

@@ -15,7 +15,13 @@ class PiecesController < ApplicationController
     @piece.x_coord = params[:x_coord]
     @piece.y_coord = params[:y_coord]
     @piece.save
+    @piece.game.take_turn!
+    @piece.game.save
     redirect_to game_path(@piece.game)
   end
+
+  private
+
+
 
 end
