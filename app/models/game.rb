@@ -63,4 +63,9 @@ class Game < ApplicationRecord
     !white_turn?
   end
 
+  def user_of_current_turn
+    return white_player if white_turn?
+    return black_player if black_turn?
+  end
+
 end
