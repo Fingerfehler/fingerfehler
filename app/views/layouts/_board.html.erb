@@ -1,10 +1,16 @@
 <script>
-    function allowDrop(event) {
-    event.preventDefault()
-    }
-    function drop(event){
-        event.preventDefault()
-    }
+    $(function (){
+        $('.draggable').draggable();
+        $( '.droppable' ).droppable({
+            drop: function( event, ui ) {
+                console.log("Dropped line 6")
+            }
+        });
+        $( '.droppable' ).on( "drop", function( event, ui ) {
+            console.log("Dropped line 10")
+        } );
+    });
+    
 </script>
 <h3 class='col-10 offset-5'><%= @game.name %></h3>
 <div class='col-10 offset-3'>
@@ -14,9 +20,10 @@
                 <% piece = @game.piece_at(x,y) %>
                 <% selected = @piece && piece.id == @piece.id %>
                 <% if piece.id %>
-                    <div draggable="true" data-x="<%= x %>" data-y="<%= y %>" data-piece-id="<%= piece.id %>" class="<%= selected ? 'highlight' : black_white_cell(x,y) %>" ondragover="allowDrop(event)"><%= show_piece(@game.piece_at(x,y)) %></div>
+                    <div draggable="true" data-x="<%= x %>" data-y="<%= y %>" data-piece-id="<%= piece.id %>" class="<%= selected ? 'highlight' : black_white_cell(x,y)%>">
+                        <p class="draggable"><%= show_piece(@game.piece_at(x,y))%></p></div>
                 <% else %>
-                    <div class="<%= selected ? 'highlight' : black_white_cell(x,y) %>" ondrop="drop(event)">X</div>
+                    <div class="droppable <%= selected ? 'highlight' : black_white_cell(x,y) %>"></div>
                 <% end %>
             <% end %>
         <% end %>         
