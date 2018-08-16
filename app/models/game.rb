@@ -52,26 +52,26 @@ class Game < ApplicationRecord
   end
 
   def white_in_checkmate?
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord + 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord - 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord + 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord - 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord - 1) }
+    white_in_check? ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord + 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord - 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord + 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord - 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord - 1) } ||
     black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord + 1) }
   end 
 
   def white_in_stalemate?
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord + 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord - 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord + 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord - 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord - 1) }
-    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord + 1) }
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord + 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord, white_king.y_coord - 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord + 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord - 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord + 1, white_king.y_coord - 1) } ||
+    black_pieces.any? { |piece| piece.valid_move?(white_king.x_coord - 1, white_king.y_coord + 1) } 
   end
 
 
@@ -80,25 +80,25 @@ class Game < ApplicationRecord
   end
 
   def black_in_checkmate?
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord + 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord - 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord + 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord - 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord - 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord + 1) }  
+    black_in_check? ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord + 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord - 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord + 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord - 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord - 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord + 1) }
   end
 
   def black_in_stalemate?
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord + 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord - 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord + 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord - 1) }
-    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord - 1) }
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord + 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord, black_king.y_coord - 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord + 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord - 1) } ||
+    white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord + 1, black_king.y_coord - 1) } ||
     white_pieces.any? { |piece| piece.valid_move?(black_king.x_coord - 1, black_king.y_coord + 1) }  
   end
 
