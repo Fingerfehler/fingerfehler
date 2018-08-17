@@ -85,5 +85,4 @@ class GamesController < ApplicationController
     @game.black_turn? && current_user.id == @game.black_player.id
   end
 
-
 end

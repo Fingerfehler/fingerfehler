@@ -24,19 +24,19 @@ class PiecesController < ApplicationController
   private
 
   def authenticate_turn
-    unless white_can_go? || black_can_go?
+    unless white_logged_in_and_white_turn? || black_logged_in_and_black_turn?
       flash.now[:alert] = "It's not your turn."
       render 'games/show'
     end
   end
 
-  def white_can_go?
+  def white_logged_in_and_white_turn?
     @piece = Piece.find_by_id(params[:id])
     @game = @piece.game
     @game.white_turn? && current_user.id == @game.white_player.id
   end
 
-  def black_can_go?
+  def black_logged_in_and_black_turn?
     @piece = Piece.find_by_id(params[:id])
     @game = @piece.game
     @game.black_turn? && current_user.id == @game.black_player.id
