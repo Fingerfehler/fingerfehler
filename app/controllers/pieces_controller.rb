@@ -28,6 +28,11 @@ class PiecesController < ApplicationController
       flash.now[:alert] = "It's not your turn."
       render 'games/show'
     end
+    unless piece_is_color_of_logged_in_user?
+      flash.now[:alert] = "You can only move your own pieces."
+      render 'games/show'
+    end
+
   end
 
   def white_logged_in_and_white_turn?
@@ -42,6 +47,13 @@ class PiecesController < ApplicationController
     @game.black_turn? && current_user.id == @game.black_player.id
   end
 
-
+  def piece_is_color_of_logged_in_user?
+    @piece = Piece.find_by_id(params[:id])
+    logged_in_user_is_white = current_user.id == @piece.game.white_player.id
+    piece_is_white_and_player_is_white = @piece.white? == logged_in_user_is_white
+    logged_in_user_is_black = current_user.id == @piece.game.black_player.id
+    piece_is_black_and_player_is_black = !@piece.white? == logged_in_user_is_black
+    return piece_is_black_and_player_is_black || piece_is_white_and_player_is_white
+  end
 
 end
