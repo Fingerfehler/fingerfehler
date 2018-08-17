@@ -1,17 +1,13 @@
 class Knight < Piece
 
   def get_image
-    if white?
-      '&#9816;'
-    else
-      '&#9822;'
-    end
+    white? ? '&#9816;' : '&#9822;'
   end
 
   def valid_move?(x,y)
-    return false unless super(x,y)
-    (y - y_coord).abs == 2 && (x - x_coord).abs == 1 ||
-    (y - y_coord).abs == 1 && (x - x_coord).abs == 2 
+    super(x,y) && 
+    x_offset(x) == 1 && y_offset(y) == 2 || 
+    x_offset(x) == 2 && y_offset(y) == 1  
   end
 
 end

@@ -12,19 +12,40 @@ class Piece < ApplicationRecord
       end
     else 
       self.update_coords!(x,y)
+      self.move_count += 1
+      take_turn!
     end
   end
 
+  def take_turn!
+    #super
+    self.game.turn += 1
+  end
+
+  def x_offset(x)
+    (x - self.x_coord).abs
+  end
+
+  def y_offset(y)
+    (y - self.y_coord).abs
+  end 
+
   def capture!
     self.update_attributes(x_coord: 8, y_coord: 8, captured?: true)
+    self.save
   end
 
   def update_coords!(x,y)
     self.update_attributes(x_coord: x, y_coord: y)
+    self.save
   end
 
   def piece_on_square(x,y)
     found_piece = game.pieces.find_by(x_coord: x, y_coord: y)
+  end
+
+  def opponent_on_square?(x,y)
+    piece_on_square(x,y).nil? ? false : piece_on_square(x,y).white? != self.white?
   end
 
   def valid_move?(x, y)
@@ -38,6 +59,10 @@ class Piece < ApplicationRecord
 
   def square_is_occupied?(x, y)
     current_pieces_coords.any? {|n| n == [x,y]}
+  end
+
+  def square_is_vacant?(x, y)
+    !square_is_occupied?(x, y)
   end
 
   def is_obstructed?(x, y)
@@ -91,7 +116,6 @@ class Piece < ApplicationRecord
     return false                                                         
   end 
 
-
   def is_diagonally_obstructed?(x, y)  
     duplicates = x_range(x,y).zip(y_range(x,y)) & current_pieces_coords    # Creates a variable storing any common coords in both arrays
     if duplicates.empty?                                                   # If empty returns false, It's not obstructed
@@ -100,4 +124,18 @@ class Piece < ApplicationRecord
       return true
     end
   end
+
+  def has_moved?
+    if self.previous_changes["x_coord"].present?
+      return self.previous_changes["x_coord"].count { |i| i } > 1
+    elsif self.previous_changes["y_coord"].present?
+      return self.previous_changes["y_coord"].count { |i| i } > 1
+    end
+    false
+  end
+
+  def has_not_moved?
+    !self.has_moved?
+  end
+
 end
