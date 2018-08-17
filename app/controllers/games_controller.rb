@@ -69,18 +69,18 @@ class GamesController < ApplicationController
   end
 
   def authenticate_turn
-    unless white_can_go? || black_can_go?
+    unless white_logged_in_and_white_turn? || black_logged_in_and_black_turn?
       flash.now[:alert] = "It's not your turn."
       render :show
     end
   end
 
-  def white_can_go?
+  def white_logged_in_and_white_turn?
     @game = Game.find(params[:game_id])
     @game.white_turn? && current_user.id == @game.white_player.id
   end
 
-  def black_can_go?
+  def black_logged_in_and_black_turn?
     @game = Game.find(params[:game_id])
     @game.black_turn? && current_user.id == @game.black_player.id
   end
