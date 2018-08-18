@@ -4,19 +4,39 @@
             snap: '.droppable',
             snapMode: "outer",
             snapTolerance: 40,
-            containment: 'table'
+            containment: 'table',
+            drag: function( event, ui ){
+                window.piece_id = event.target.attributes[1].value
+            }
         });
         $( '.droppable' ).droppable({
             drop: function( event, ui ) {
-                console.log("Dropped line 6")
-
             }
         });
         $( '.droppable' ).on( "drop", function( event, ui ) {
             var x = event.currentTarget.attributes[1].value
             var y = event.currentTarget.attributes[2].value
-            console.log(x, y)
-
+            var game_id = event.currentTarget.attributes[3].value
+                console.log(event.currentTarget)
+                console.log(window.piece_id)
+            $.ajax({
+                url:  + game_id + "/make_move", // Route to the Script Controller method
+                    type: "PUT",
+                dataType: "json",
+                    data: { 
+                        piece_id: window.piece_id, 
+                        x: x,
+                        y: y,
+                     }, // This goes to Controller in params hash, i.e. params[:file_name]
+                complete: function() {},
+                 success: function(data, textStatus, xhr) {
+                            // Do something with the response here
+                            //editor.setValue(data.file_content) // Show the file contents in our editor.
+                          },
+                   error: function() {
+                            alert("Ajax error!")
+                          }
+    });
         } );
     });
     
@@ -55,9 +75,9 @@
         <tr class="row">
             <% 0.upto(7) do |x| %>
                 <% piece = @game.piece_at(x,y) %>           
-                    <td class="droppable <%= black_white_cell(x,y) %>" data-x="<%= x %>" data-y="<%= y %>">
+                    <td class="droppable <%= black_white_cell(x,y) %>" data-x="<%= x %>" data-y="<%= y %>" data-game_id="<%= @game.id %>">
                 <% if piece.id %>
-                    <p class="draggable"><%= show_piece(piece)%></p>
+                    <p class="draggable" data-id="<%= piece.id %>"><%= show_piece(piece)%></p>
                 <% end %></td>
             <% end %>
         <% end %>         

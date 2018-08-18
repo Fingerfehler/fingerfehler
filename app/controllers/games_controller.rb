@@ -16,6 +16,20 @@ class GamesController < ApplicationController
     render :show 
   end
 
+  def make_move
+    @game = Game.find(params[:game_id])
+    @pieces = @game.pieces
+    piece_to_move = Piece.find(params[:piece_id].to_i)
+    x = params[:x]
+    y = params[:y]
+    if piece_to_move.valid_move?(x, y)
+      piece_to_move.move_to!(x, y)
+    else
+
+    end
+    render :show
+  end
+
   def new
     @game = Game.new
   end
