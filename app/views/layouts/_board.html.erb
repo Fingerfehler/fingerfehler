@@ -54,14 +54,11 @@
         <% 7.downto(0) do |y| %>
         <tr class="row">
             <% 0.upto(7) do |x| %>
-                <% piece = @game.piece_at(x,y) %>
-                <% selected = @piece && piece.id == @piece.id %>
+                <% piece = @game.piece_at(x,y) %>           
+                    <td class="droppable <%= black_white_cell(x,y) %>" data-x="<%= x %>" data-y="<%= y %>">
                 <% if piece.id %>
-                    <td draggable="true" data-x="<%= x %>" data-y="<%= y %>" data-piece-id="<%= piece.id %>" class="<%= selected ? 'highlight' : black_white_cell(x,y)%>">
-                        <p class="draggable"><%= show_piece(@game.piece_at(x,y))%></p></td>
-                <% else %>
-                    <td class="droppable <%= selected ? 'highlight' : black_white_cell(x,y) %>" data-x="<%= x %>" data-y="<%= y %>"></td>
-                <% end %>
+                    <p class="draggable"><%= show_piece(piece)%></p>
+                <% end %></td>
             <% end %>
         <% end %>         
     </div>
