@@ -5,7 +5,7 @@ class Bishop < Piece
   end
 
   def valid_move?(x,y)
-    return unless is_unobstructed?(x,y)
+    is_unobstructed?(x,y) &&
     super(x,y) &&
     x_offset(x) == y_offset(y)
   end

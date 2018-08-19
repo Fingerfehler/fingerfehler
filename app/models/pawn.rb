@@ -5,7 +5,7 @@ class Pawn < Piece
   end
 
   def valid_move?(x,y)
-    return unless is_unobstructed?(x,y)
+    is_unobstructed?(x,y)
     return false unless super(x,y)
     return false unless valid_white_move?(x,y) || valid_black_move?(x,y)
     valid_single_move?(x,y) || valid_first_move?(x,y) || valid_standard_capture?(x,y)
