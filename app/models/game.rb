@@ -5,6 +5,9 @@ class Game < ApplicationRecord
   scope :available, -> { where(black_player_id: nil) }
   scope :mine, ->(user) { where(white_player_id: user.id) }
   after_create :populate_game!
+  after_initialize {
+    self.turn = 0 if self.turn.nil?
+  }
 
   def populate_game!
     [true, false].each do |is_white|
@@ -111,7 +114,7 @@ class Game < ApplicationRecord
   end
 
   def white_turn?
-    turn % 2 == 0
+    turn.to_i % 2 == 0
   end
 
   def black_turn?

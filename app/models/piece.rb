@@ -1,10 +1,14 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  after_initialize {
+    self.move_count = 0 if self.move_count.nil?
+  }
   
   def move_to!(x,y)
+    return unless valid_move?(x, y)
     if piece_to_capture = game.pieces.find_by(x_coord: x, y_coord: y)
       if piece_to_capture.white? == self.white?
-        return "Can't capture your own piece"
+        return false
       else
         piece_to_capture.capture!
         self.update_coords!(x,y)
