@@ -22,6 +22,10 @@ class Piece < ApplicationRecord
     self.game.turn += 1
   end
 
+  def black?
+    !white?
+  end
+
   def x_offset(x)
     (x - self.x_coord).abs
   end

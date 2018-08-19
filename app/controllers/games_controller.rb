@@ -48,11 +48,6 @@ class GamesController < ApplicationController
     @pieces = @game.pieces
   end
 
-  #def update
-  #  @game = Game.find(params[:id])
-  #  @pieces = @game.pieces
-  #end
-
   def destroy
     @game = Game.find(params[:id])
     @pieces = @game.pieces
