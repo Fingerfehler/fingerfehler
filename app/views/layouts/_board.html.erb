@@ -44,6 +44,9 @@
     
 </script>
 <h3 class='col-10 offset-5'><%= @game.name %></h3>
+<h4 class='col-10 offset-5'>
+  It's <%= @game.user_of_current_turn.email %>'s turn.
+</h4>
 
 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Rage Quit!
 </button>
@@ -89,6 +92,5 @@
             <% end %>
         <% end %>         
     </div>
-    
 </div>
 
