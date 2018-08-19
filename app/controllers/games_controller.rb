@@ -48,6 +48,26 @@ class GamesController < ApplicationController
     @pieces = @game.pieces
   end
 
+  def castle_kingside
+    @game = Game.find(params[:game_id])
+    if @game.can_kingside_castle?(current_user)
+      @game.kingside_castle!(current_user)
+    else
+      flash.now[:alert] = "You cannot castle at this time."
+    end
+    render :show
+  end
+
+  def castle_queenside
+    @game = Game.find(params[:game_id])
+    if @game.can_queenside_castle?(current_user)
+      @game.queenside_castle!(current_user)
+    else
+      flash.now[:alert] = "You cannot castle at this time."
+    end
+    render :show
+  end
+
   def destroy
     @game = Game.find(params[:id])
     @pieces = @game.pieces
