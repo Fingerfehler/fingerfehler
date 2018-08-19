@@ -93,6 +93,7 @@ RSpec.describe Piece, type: :model do
       expect(piece.y_coord).to eq 5
     end
   end
+  
 end
 
 
