@@ -5,6 +5,7 @@ class King < Piece
   end
   
   def valid_move?(x,y)
+    return unless is_unobstructed?(x,y)
     super(x,y) &&
     can_move_to?(x,y) &&
     safe?(x,y)
