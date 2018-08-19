@@ -11,6 +11,7 @@
         });
         $( '.droppable' ).droppable({
             drop: function( event, ui ) {
+
             }
         });
         $( '.droppable' ).on( "drop", function( event, ui ) {
@@ -24,9 +25,9 @@
                     type: "PUT",
                 dataType: "json",
                     data: { 
-                        piece_id: window.piece_id, 
-                        x: x,
-                        y: y,
+                piece_id: window.piece_id, 
+                       x: x,
+                       y: y,
                      }, // This goes to Controller in params hash, i.e. params[:file_name]
                 complete: function() {},
                  success: function(data, textStatus, xhr) {
@@ -34,6 +35,7 @@
                             //editor.setValue(data.file_content) // Show the file contents in our editor.
                           },
                    error: function() {
+                        revert: true
                             alert("Ajax error!")
                           }
     });
