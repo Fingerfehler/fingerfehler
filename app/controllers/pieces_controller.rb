@@ -12,8 +12,7 @@ class PiecesController < ApplicationController
 
   def update
     @piece = Piece.find_by_id(params[:id])
-    @piece.x_coord = params[:x_coord]
-    @piece.y_coord = params[:y_coord]
+    @piece.move_to!(params[:x_coord],params[:y_coord])
     @piece.save
     redirect_to game_path(@piece.game)
   end

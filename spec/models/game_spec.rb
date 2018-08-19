@@ -94,4 +94,36 @@ RSpec.describe Game, type: :model do
       expect(white_rook.x_coord).to eq 5
     end
   end
+  describe "game in checkmate?" do
+    it "should be be true if game is in checkmate" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      black_king = King.create(:x_coord => 2, :y_coord => 1, :game_id => game.id, :white? => false)
+      white_rook = Rook.create(:x_coord => 0, :y_coord => 2, :game_id => game.id, :white? => true)
+      white_rook2 = Rook.create(:x_coord => 0, :y_coord => 1, :game_id => game.id, :white? => true)
+      white_rook3 = Rook.create(:x_coord => 0, :y_coord => 0, :game_id => game.id, :white? => true)     
+      white_king = King.create(:x_coord => 5, :y_coord => 6, :game_id => game.id, :white? => true)
+      black_rook = Rook.create(:x_coord => 7, :y_coord => 5, :game_id => game.id, :white? => false)
+      black_rook2 = Rook.create(:x_coord => 7, :y_coord => 6, :game_id => game.id, :white? => false)
+      black_rook3 = Rook.create(:x_coord => 7, :y_coord => 7, :game_id => game.id, :white? => false)      
+      game.reload
+      expect(game.checkmate?).to eq true
+    end
+  end
+  describe "game in stalemate?" do
+    it "should be be true if game is in stalemate" do
+      user = User.create(:email => "fakeemail@email", :password => "secret", :password_confirmation => "secret")
+      game = Game.create(:name => "test", :white_player_id => user.id)
+      game.pieces.destroy_all
+      black_king = King.create(:x_coord => 2, :y_coord => 1, :game_id => game.id, :white? => false)
+      white_rook = Rook.create(:x_coord => 0, :y_coord => 1, :game_id => game.id, :white? => true)
+      white_rook2 = Rook.create(:x_coord => 3, :y_coord => 2, :game_id => game.id, :white? => true)
+      white_king = King.create(:x_coord => 5, :y_coord => 6, :game_id => game.id, :white? => true)
+      black_rook = Rook.create(:x_coord => 4, :y_coord => 7, :game_id => game.id, :white? => false)
+      black_rook2 = Rook.create(:x_coord => 6, :y_coord => 5, :game_id => game.id, :white? => false)
+      game.reload
+      expect(game.stalemate?).to eq true
+    end
+  end
 end

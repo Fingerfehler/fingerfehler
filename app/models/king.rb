@@ -6,6 +6,11 @@ class King < Piece
   
   def valid_move?(x,y)
     super(x,y) &&
+    can_move_to?(x,y) &&
+    safe?(x,y)
+  end
+
+  def can_move_to?(x,y)
     x_offset(x) <= 1 && y_offset(y) <= 1
   end
 
@@ -23,6 +28,14 @@ class King < Piece
 
   def rook_present?(x,y)
     game.piece_at(x,y).is_a? Rook
+  end
+
+  def safe?(x,y)
+    if white?
+      game.black_pieces.none? { |piece| piece.valid_move?(x, y) }
+    else
+      game.white_pieces.none? { |piece| piece.valid_move?(x, y) }
+    end
   end
 
 end
