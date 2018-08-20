@@ -20,7 +20,8 @@ class Rook < Piece
   end
 
   def castle!
-    move_to!(x_coord + castling_displacement, y_coord)
+    update_coords!(x_coord + castling_displacement, y_coord)
+    self.move_count += 1
   end
 
   def castling_displacement
