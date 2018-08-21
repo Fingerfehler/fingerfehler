@@ -5,6 +5,7 @@ class Rook < Piece
   end
 
   def valid_move?(x,y)
+    is_unobstructed?(x,y) &&
     super(x,y) &&
     x_offset(x) == 0 || y_offset(y) == 0
   end 
@@ -19,7 +20,8 @@ class Rook < Piece
   end
 
   def castle!
-    move_to!(x_coord + castling_displacement, y_coord)
+    update_coords!(x_coord + castling_displacement, y_coord)
+    self.move_count += 1
   end
 
   def castling_displacement

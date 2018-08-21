@@ -25,19 +25,18 @@
                     type: "PUT",
                 dataType: "json",
                     data: { 
-                piece_id: window.piece_id, 
-                       x: x,
-                       y: y,
-                     }, // This goes to Controller in params hash, i.e. params[:file_name]
-                complete: function() {},
-                 success: function(data, textStatus, xhr) {
+                        piece_id: window.piece_id, 
+                        x: x,
+                        y: y,
+                        }, // This goes to Controller in params hash, i.e. params[:file_name]
+                 success: function(data, textStatus, jqHXR) {
                             // Do something with the response here
                             //editor.setValue(data.file_content) // Show the file contents in our editor.
                           },
-                   error: function() {
-                        revert: true
-                            alert("Ajax error!")
-                          }
+                   error: function(jqXHR, status, err) {
+                        alert("That was not a valid move!")
+                        location.reload()
+                         }
     });
         } );
     });

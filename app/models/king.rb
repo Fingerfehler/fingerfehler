@@ -5,6 +5,7 @@ class King < Piece
   end
   
   def valid_move?(x,y)
+    is_unobstructed?(x,y) &&
     super(x,y) &&
     can_move_to?(x,y) &&
     safe?(x,y)
@@ -19,7 +20,8 @@ class King < Piece
   end
 
   def castle!(x,y)
-    move_to!(x_coord + castling_displacement(x,y), y)
+    update_coords!(x_coord + castling_displacement(x,y), y)
+    self.move_count += 1
   end
 
   def castling_displacement(x,y)
